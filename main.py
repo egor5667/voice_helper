@@ -1,12 +1,21 @@
 from email.mime import audio
 import speech_recognition
 
-sr = speech_recognition.Recognizer()    #создание элемента обращения к библиотеке
+sr = speech_recognition.Recognizer()    
 sr.pause_threshold = 0.5
 
+def greet():
+    return("РїСЂРёРІРµС‚!")
+
 with speech_recognition.Microphone() as mic:
-    sr.adjust_for_ambient_noise(source = mic, duration = 0.5)       #элемент получениия образа окружающего шума перед запуском
-    audio = sr.listen(source = mic)     #элемент получения данных с микрофона устройства
-    query = sr.recognize_google(audio_data = audio, language = 'ru-RU')     #переменная для записи, распознанной через google API, речи 
-    query.lower()       #перевод всего распзнанного текста в нижний регистр
-print(query)
+    sr.adjust_for_ambient_noise(source = mic, duration = 0.5)     
+    audio = sr.listen(source = mic)    
+    query = sr.recognize_google(audio_data = audio, language = 'ru-RU')
+    query = query.lower()
+
+    
+if query == "Р·РґСЂР°РІСЃС‚РІСѓР№":
+    print(greet())
+else:
+    print("РќРёС‡РµРіРѕ РЅРµ РїРѕРЅСЏР»!")
+    print("РўС‹ СЃРєР°Р·Р°Р»: ", query)
